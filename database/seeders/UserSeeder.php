@@ -6,6 +6,8 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Doctor;
+use App\Models\Patient;
 
 class UserSeeder extends Seeder
 {
@@ -16,30 +18,40 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
-            'name' => 'Diyata',
-            'email' => 'diyata@gmail.com',
-            'password' => Hash::make('Try123!'),
+        // Create specific admin user
+        $admin = User::create([
+            'name' => 'Admin User',
+            'email' => 'admin@example.com',
+            'password' => Hash::make('password'),
+            'role' => 'admin',
         ]);
-        User::create([
-            'name' => 'Diwata',
-            'email' => 'diwata@gmail.com',
-            'password' => Hash::make('Try123!'),
+
+        // Create specific doctor user and profile
+        $doctorUser = User::create([
+            'name' => 'Doctor User',
+            'email' => 'doctor@example.com',
+            'password' => Hash::make('password'),
+            'role' => 'doctor',
         ]);
-        User::create([
-            'name' => 'Malupiton',
-            'email' => 'malupiton@gmail.com',
-            'password' => Hash::make('Try123!'),
+
+        Doctor::create([
+            'user_id' => $doctorUser->id,
+            'specialization' => 'Cardiology',
+            'phone' => '123-456-7890',
         ]);
-        User::create([
-            'name' => 'Tanggol',
-            'email' => 'tanggol@gmail.com',
-            'password' => Hash::make('Try123!'),
+
+        // Create specific patient user and profile
+        $patientUser = User::create([
+            'name' => 'Patient User',
+            'email' => 'patient@example.com',
+            'password' => Hash::make('password'),
+            'role' => 'patient',
         ]);
-        User::create([
-            'name' => 'lillusis',
-            'email' => 'lillusis@gmail.com',
-            'password' => Hash::make('Try123!'),
+
+        Patient::create([
+            'user_id' => $patientUser->id,
+            'phone' => '098-765-4321',
+            'address' => '123 Main St, Anytown, USA',
         ]);
     }
 }
