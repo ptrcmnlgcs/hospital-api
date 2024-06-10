@@ -12,17 +12,18 @@ return new class extends Migration
      * @return void
      */
     public function up()
-    {
-        Schema::create('patients', function (Blueprint $table) {
-            $table->id();
-            $table->string('phone');
-            $table->text('address')->nullable();
-            $table->unsignedBigInteger('user_id');
-            $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-        });
-    }
+{
+    Schema::create('patients', function (Blueprint $table) {
+        $table->id();
+        $table->string('name');
+        $table->string('email')->unique();
+        $table->string('phone');
+        $table->date('dob');
+        $table->string('gender');
+        $table->string('doctor_name'); 
+        $table->timestamps();
+    });
+}
 
     /**
      * Reverse the migrations.

@@ -9,12 +9,12 @@ class Patient extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
-        'user_id', 'phone', 'address',
+        'name', 'email', 'phone', 'dob', 'gender', 'doctor_name'
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 }
